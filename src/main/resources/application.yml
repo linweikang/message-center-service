@@ -1,0 +1,50 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: message-center-service
+
+  # ?????
+  datasource:
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+    url: jdbc:p6spy:oracle:thin:@10.0.14.20:1521:stdb
+    username: foxdb12
+    password: foxdb_123
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      test-while-idle: false
+
+  main:
+    allow-bean-definition-overriding: true
+    # ??????
+    allow-circular-references: true
+  # ??Springfox????????
+  mvc:
+    pathmatch:
+      matching-strategy: ant-path-matcher
+
+mybatis-plus:
+  # mapper-locations: classpath*:/mapper/**Mapper.xml
+  # type-aliases-package: net.sitir.tavern.pojo.model
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    # ??call-setter-on-nulls?true,???service.list????null????????
+    call-setters-on-nulls: true
+    jdbc-type-for-null: 'null'
+  global-config:
+    db-config:
+      # update-strategy: NOT_NULL
+      # ??: ??mp??????????????????? (????xml??)
+      # ?????????1???????1
+      logic-delete-value: 1
+      # ?????????0????????0
+      logic-not-delete-value: 0
+
+swagger2:
+  switch: true
+knife4j:
+  enable: true
+  production: false
