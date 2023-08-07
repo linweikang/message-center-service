@@ -9,7 +9,7 @@ spring:
   datasource:
     driver-class-name: com.p6spy.engine.spy.P6SpyDriver
     url: jdbc:p6spy:oracle:thin:@10.0.14.20:1521:stdb
-    username: foxdb12
+    username: foxdb10
     password: foxdb_123
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
