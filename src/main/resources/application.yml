@@ -24,6 +24,18 @@ spring:
     pathmatch:
       matching-strategy: ant-path-matcher
 
+  mail:
+    host: smtp.qq.com
+    username: xxx
+    password: xx
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          required: true
+
 mybatis-plus:
   # mapper-locations: classpath*:/mapper/**Mapper.xml
   # type-aliases-package: net.sitir.tavern.pojo.model
