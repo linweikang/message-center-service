@@ -26,8 +26,8 @@ spring:
 
   mail:
     host: smtp.qq.com
-    username: xxx
-    password: xx
+    username: 779333472@qq.com
+    password: pjupazjmjciubbhe
     properties:
       mail:
         smtp:

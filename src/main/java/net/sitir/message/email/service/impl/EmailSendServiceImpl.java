@@ -1,5 +1,6 @@
 package net.sitir.message.email.service.impl;
 
+import javax.annotation.PostConstruct;
 import javax.mail.internet.MimeMessage;
 
 import org.slf4j.Logger;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Service;
 
 import net.sitir.message.email.domain.Email;
 import net.sitir.message.email.service.EmailSendService;
@@ -18,6 +20,7 @@ import net.sitir.message.email.service.EmailSendService;
  * @author cwl
  * 2023-8-14
  */
+@Service
 public class EmailSendServiceImpl implements EmailSendService{
     
     private static final Logger logger = LoggerFactory.getLogger(EmailSendServiceImpl.class);
@@ -32,6 +35,16 @@ public class EmailSendServiceImpl implements EmailSendService{
 	// static {
 	// 	 System.setProperty("mail.mime.splitlongparameters","false");
 	// }
+
+	/* @PostConstruct
+	public void init() throws Exception{
+		Email e = new Email();
+		e.setContent("#######");
+		e.setSubject("test");
+		String[] s = {"779333472@qq.com"};
+		e.setRecipients(s);
+		this.send(e);
+	} */
 
 	@Override
 	public void send(Email mail) throws Exception {
