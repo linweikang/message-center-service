@@ -37,10 +37,10 @@ import net.sitir.message.component.aop.bo.AccountInfo;
 @RestController
 @Api(tags = "渠道类型信息表接口")
 @Validated
-@RequestMapping("/quality/channelTypeEntity")
+@RequestMapping("/mc/channel-type")
 public class ChannelTypeController {
     @Autowired
-    public ChannelTypeService channelTypeEntityService;
+    public ChannelTypeService channelTypeService;
 
     @ApiOperation(value = "分页条件查询渠道类型信息表",
             notes = "查看渠道类型信息表，基本属性包括ID、名称、编码、状态等")
@@ -53,7 +53,7 @@ public class ChannelTypeController {
                     .build();
         dto.setCurrent(param.getCurrent());
         dto.setPageSize(param.getPageSize());
-        Pagination<ChannelTypeVO> pagination = channelTypeEntityService.getPage(dto);
+        Pagination<ChannelTypeVO> pagination = channelTypeService.getPage(dto);
         return new CommonResult<Pagination<ChannelTypeVO>>().success(pagination);
 
     }
@@ -74,7 +74,7 @@ public class ChannelTypeController {
         dto.setModifier(accountInfo.getPersonId());
         dto.setModifierName(accountInfo.getAccountName());
 
-        channelTypeEntityService.saveEntity(dto);
+        channelTypeService.saveEntity(dto);
         return CommonResult.success("新增成功");
 
     }
@@ -92,7 +92,7 @@ public class ChannelTypeController {
         dto.setModifier(accountInfo.getPersonId());
         dto.setModifierName(accountInfo.getAccountName());
 
-        channelTypeEntityService.updateEntity(dto);
+        channelTypeService.updateEntity(dto);
         return CommonResult.success("修改成功");
 
     }

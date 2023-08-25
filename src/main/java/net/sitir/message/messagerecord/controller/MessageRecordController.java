@@ -1,5 +1,8 @@
 package net.sitir.message.messagerecord.controller;
 
+import net.sitir.message.email.domain.Email;
+import net.sitir.message.email.service.EmailSendService;
+import net.sitir.message.utils.SendSmsUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,10 +40,16 @@ import net.sitir.message.component.aop.bo.AccountInfo;
 @RestController
 @Api(tags = "消息记录信息表接口")
 @Validated
-@RequestMapping("/quality/messageRecordEntity")
+@RequestMapping("/mc/record")
 public class MessageRecordController {
     @Autowired
-    public MessageRecordService messageRecordEntityService;
+    public MessageRecordService messageRecordService;
+
+    @Autowired
+    private EmailSendService emailSendService;
+
+    @Autowired
+    private SendSmsUtil smsUtil;
 
     @ApiOperation(value = "分页条件查询消息记录信息表",
             notes = "查看消息记录信息表，基本属性包括ID、名称、编码、状态等")
@@ -53,7 +62,7 @@ public class MessageRecordController {
                     .build();
         dto.setCurrent(param.getCurrent());
         dto.setPageSize(param.getPageSize());
-        Pagination<MessageRecordVO> pagination = messageRecordEntityService.getPage(dto);
+        Pagination<MessageRecordVO> pagination = messageRecordService.getPage(dto);
         return new CommonResult<Pagination<MessageRecordVO>>().success(pagination);
 
     }
@@ -71,7 +80,7 @@ public class MessageRecordController {
         dto.setCreator(accountInfo.getPersonId());
         dto.setCreatorName(accountInfo.getAccountName());
 
-        messageRecordEntityService.saveEntity(dto);
+        messageRecordService.saveEntity(dto);
         return CommonResult.success("新增成功");
 
     }
@@ -87,11 +96,24 @@ public class MessageRecordController {
         OperationMessageRecordDTO dto = new OperationMessageRecordDTO();
         BeanUtils.copyProperties(param,dto);
 
-        messageRecordEntityService.updateEntity(dto);
+        messageRecordService.updateEntity(dto);
         return CommonResult.success("修改成功");
 
     }
 
+    @ApiOperation(value = "根据邮箱发送邮件接口", notes = "根据邮箱发送邮件接口")
+    @PostMapping("/sendEmail")
+    public CommonResult<Object> sendEmail(@RequestBody Email email) throws Exception {
+        emailSendService.send(email);
+        return CommonResult.success("发送成功！！！");
+    }
+
+    @ApiOperation(value = "根据手机号码发送验证码短信接口", notes = "根据手机号码发送验证码短信接口")
+    @GetMapping("/sendSms")
+    public CommonResult<Object> sendSms(@ApiParam(value = "手机号码", required = true, example = "11122223333") @RequestParam("phone") String phone) {
+        String res = smsUtil.sendSms(phone);
+        return CommonResult.success(res);
+    }
 
 }
 

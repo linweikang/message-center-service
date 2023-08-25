@@ -37,10 +37,10 @@ import net.sitir.message.component.aop.bo.AccountInfo;
 @RestController
 @Api(tags = "消息模板信息表接口")
 @Validated
-@RequestMapping("/quality/messageTemplateEntity")
+@RequestMapping("/mc/template")
 public class MessageTemplateController {
     @Autowired
-    public MessageTemplateService messageTemplateEntityService;
+    public MessageTemplateService messageTemplateService;
 
     @ApiOperation(value = "分页条件查询消息模板信息表",
             notes = "查看消息模板信息表，基本属性包括ID、名称、编码、状态等")
@@ -53,7 +53,7 @@ public class MessageTemplateController {
                     .build();
         dto.setCurrent(param.getCurrent());
         dto.setPageSize(param.getPageSize());
-        Pagination<MessageTemplateVO> pagination = messageTemplateEntityService.getPage(dto);
+        Pagination<MessageTemplateVO> pagination = messageTemplateService.getPage(dto);
         return new CommonResult<Pagination<MessageTemplateVO>>().success(pagination);
 
     }
@@ -73,7 +73,7 @@ public class MessageTemplateController {
         dto.setModifier(accountInfo.getPersonId());
         dto.setModifierName(accountInfo.getAccountName());
 
-        messageTemplateEntityService.saveEntity(dto);
+        messageTemplateService.saveEntity(dto);
         return CommonResult.success("新增成功");
 
     }
@@ -91,7 +91,7 @@ public class MessageTemplateController {
         dto.setModifier(accountInfo.getPersonId());
         dto.setModifierName(accountInfo.getAccountName());
 
-        messageTemplateEntityService.updateEntity(dto);
+        messageTemplateService.updateEntity(dto);
         return CommonResult.success("修改成功");
 
     }

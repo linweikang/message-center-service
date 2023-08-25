@@ -60,6 +60,13 @@ public class AccountInfoAop {
         Method method = signature.getMethod();
         Parameter[] parameters = method.getParameters();
 
+        // 判断是否是发送短信或者发送邮件测试接口，如果是直接放行
+        String requestURI = request.getRequestURI();
+        if(requestURI.endsWith("sendSms") || requestURI.endsWith("sendEmail")){
+            log.info(request.getRequestURI());
+            return proceedingJoinPoint.proceed(args);
+        }
+
         // 获取token
         String auth = request.getHeader("Authorization");
         if (StringUtils.isBlank(auth)){

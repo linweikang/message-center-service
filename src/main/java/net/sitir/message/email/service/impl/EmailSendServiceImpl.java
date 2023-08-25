@@ -47,7 +47,7 @@ public class EmailSendServiceImpl implements EmailSendService{
 	} */
 
 	@Override
-	public void send(Email mail) throws Exception {
+	public void send(Email mail) {
 		logger.info("发送邮件：{}",mail.getContent());
 		SimpleMailMessage message = new SimpleMailMessage();
 		message.setFrom(USER_NAME);

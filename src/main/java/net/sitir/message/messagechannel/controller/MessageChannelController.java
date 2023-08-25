@@ -37,10 +37,10 @@ import net.sitir.message.component.aop.bo.AccountInfo;
 @RestController
 @Api(tags = "消息渠道信息表接口")
 @Validated
-@RequestMapping("/quality/messageChannelEntity")
+@RequestMapping("/mc/channel")
 public class MessageChannelController {
     @Autowired
-    public MessageChannelService messageChannelEntityService;
+    public MessageChannelService messageChannelService;
 
     @ApiOperation(value = "分页条件查询消息渠道信息表",
             notes = "查看消息渠道信息表，基本属性包括ID、名称、编码、状态等")
@@ -53,7 +53,7 @@ public class MessageChannelController {
                     .build();
         dto.setCurrent(param.getCurrent());
         dto.setPageSize(param.getPageSize());
-        Pagination<MessageChannelVO> pagination = messageChannelEntityService.getPage(dto);
+        Pagination<MessageChannelVO> pagination = messageChannelService.getPage(dto);
         return new CommonResult<Pagination<MessageChannelVO>>().success(pagination);
 
     }
@@ -73,7 +73,7 @@ public class MessageChannelController {
         dto.setModifier(accountInfo.getPersonId());
         dto.setModifierName(accountInfo.getAccountName());
 
-        messageChannelEntityService.saveEntity(dto);
+        messageChannelService.saveEntity(dto);
         return CommonResult.success("新增成功");
 
     }
@@ -91,7 +91,7 @@ public class MessageChannelController {
         dto.setModifier(accountInfo.getPersonId());
         dto.setModifierName(accountInfo.getAccountName());
 
-        messageChannelEntityService.updateEntity(dto);
+        messageChannelService.updateEntity(dto);
         return CommonResult.success("修改成功");
 
     }
