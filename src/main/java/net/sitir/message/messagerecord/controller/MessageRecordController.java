@@ -40,7 +40,7 @@ import net.sitir.message.component.aop.bo.AccountInfo;
 @RestController
 @Api(tags = "消息记录信息表接口")
 @Validated
-@RequestMapping("/mc/record")
+@RequestMapping("/v1/mc/record")
 public class MessageRecordController {
     @Autowired
     public MessageRecordService messageRecordService;

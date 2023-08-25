@@ -37,7 +37,7 @@ import net.sitir.message.component.aop.bo.AccountInfo;
 @RestController
 @Api(tags = "渠道类型信息表接口")
 @Validated
-@RequestMapping("/mc/channel-type")
+@RequestMapping("/v1/mc/channel-type")
 public class ChannelTypeController {
     @Autowired
     public ChannelTypeService channelTypeService;

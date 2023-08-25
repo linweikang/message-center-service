@@ -37,7 +37,7 @@ import net.sitir.message.component.aop.bo.AccountInfo;
 @RestController
 @Api(tags = "消息渠道信息表接口")
 @Validated
-@RequestMapping("/mc/channel")
+@RequestMapping("/v1/mc/channel")
 public class MessageChannelController {
     @Autowired
     public MessageChannelService messageChannelService;

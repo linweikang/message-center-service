@@ -37,7 +37,7 @@ import net.sitir.message.component.aop.bo.AccountInfo;
 @RestController
 @Api(tags = "消息模板信息表接口")
 @Validated
-@RequestMapping("/mc/template")
+@RequestMapping("/v1/mc/template")
 public class MessageTemplateController {
     @Autowired
     public MessageTemplateService messageTemplateService;
